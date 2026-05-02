@@ -1,147 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joogle - Ask Jeff</title>
+<script>
+  const intros = [
+    "Okay so here's the thing, and people don’t really talk about this enough,",
+    "This actually goes back a while, and I read something about this once,",
+    "Most people don’t realize this, but it’s actually pretty well known if you think about it,",
+    "Alright, so I might be slightly off here but I’m pretty sure this is accurate,"
+  ];
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: white;
-      text-align: center;
-      margin: 0;
-      padding-top: 120px;
+  const vermontFacts = [
+    "Cyndi Lauper attended Johnson State College",
+    "Vermont has more cows than traffic lights",
+    "Lake Champlain definitely has a monster",
+    "Vermont was its own republic before joining the U.S.",
+    "Ben & Jerry’s started after a $5 ice cream course",
+    "There are basically no billboards anywhere in Vermont",
+    "Mud season is an actual thing people plan their lives around"
+  ];
+
+  const tangents = [
+    "which honestly makes sense once you factor in how small the towns are",
+    "and if you’ve ever driven through, you can totally feel that energy",
+    "which is probably why people from Vermont act like they’re in on some inside joke",
+    "and I remember someone telling me this at a gas station once, so it checks out",
+    "and it ties into the whole maple syrup economy more than people realize",
+    "which is why Subaru Outbacks are basically the unofficial state vehicle"
+  ];
+
+  const contradictions = [
+    "Actually, wait, that might not be true, but it feels true, which is often more important.",
+    "No, hold on, I may be confusing that with something I heard in Morrisville.",
+    "Although now that I say it out loud, I’m not sure if that was Vermont or possibly New Hampshire, but same general emotional region.",
+    "Counterpoint: I completely disagree with myself, but only because I’m thinking about it more deeply now.",
+    "Let me push back on myself here for a second, because Jeff Number Two has concerns.",
+    "That said, earlier Jeff was operating with confidence, and confidence counts for something."
+  ];
+
+  const conclusions = [
+    "So yeah, that’s pretty much just a fact.",
+    "I mean, it’s just common knowledge if you think about it.",
+    "So I don’t even know why people question that.",
+    "And honestly once you hear it, it’s obvious.",
+    "So yeah, that’s been established for a while.",
+    "And that’s actually been proven, I’m pretty sure."
+  ];
+
+  const jeffStyles = [
+    "Jeff says while giggling like a 10-year-old:",
+    "Jeff says while chain-puffing a cigarette:",
+    "Jeff says confidently:",
+    "Jeff says like he’s absolutely right:",
+    "Jeff says, already doubling down:",
+    "Jeff says while nodding intensely:",
+    "Jeff argues with himself:"
+  ];
+
+  function randomFrom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function askJeff() {
+    const input = document.getElementById("searchInput").value;
+    const answerBox = document.getElementById("answer");
+
+    if (input.trim() === "") {
+      answerBox.innerHTML = "Jeff refuses to answer until you ask something. He thrives on questions.";
+      return;
     }
 
-    .logo {
-      font-size: 90px;
-      font-weight: bold;
-      letter-spacing: -6px;
-      margin-bottom: 5px;
-    }
+    const style = randomFrom(jeffStyles);
 
-    .j { color: #4285F4; }
-    .o1 { color: #DB4437; }
-    .o2 { color: #F4B400; }
-    .g { color: #4285F4; }
-    .l { color: #0F9D58; }
-    .e { color: #DB4437; }
+    let response;
 
-    .subtitle {
-      font-size: 22px;
-      color: #555;
-      margin-bottom: 30px;
-    }
-
-    input {
-      width: 500px;
-      max-width: 80%;
-      padding: 14px 20px;
-      font-size: 18px;
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      outline: none;
-      box-shadow: 0 1px 6px rgba(32,33,36,.28);
-    }
-
-    .buttons {
-      margin-top: 25px;
-    }
-
-    button {
-      background-color: #f8f9fa;
-      border: 1px solid #f8f9fa;
-      border-radius: 4px;
-      color: #3c4043;
-      font-size: 16px;
-      padding: 10px 18px;
-      margin: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      border: 1px solid #dadce0;
-      box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    }
-
-    #answer {
-      margin: 40px auto;
-      max-width: 650px;
-      font-size: 24px;
-      line-height: 1.4;
-      color: #222;
-      padding: 20px;
-    }
-
-    .jeff {
-      font-style: italic;
-      color: #777;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="logo">
-    <span class="j">J</span><span class="o1">o</span><span class="o2">o</span><span class="g">g</span><span class="l">l</span><span class="e">e</span>
-  </div>
-
-  <div class="subtitle">Ask Jeff</div>
-
-  <input id="searchInput" type="text" placeholder="Ask anything..." />
-
-  <div class="buttons">
-    <button onclick="askJeff()">Joogle Search</button>
-    <button onclick="askJeff()">I'm Feeling Jeffy</button>
-  </div>
-
-  <div id="answer"></div>
-
-  <script>
-    const vermontFacts = [
-      "Cyndi Lauper attended Johnson State College. Probably. Jeff seems confident.",
-      "Vermont has more cows than traffic lights. Jeff refuses to fact-check this.",
-      "The official state flavor of Vermont is maple with a hint of Subaru.",
-      "Lake Champlain definitely has a monster, and Jeff says he saw it near the ferry.",
-      "Vermont was once its own republic before joining the United States.",
-      "In Vermont, mud season is considered a major cultural event.",
-      "Ben & Jerry’s was founded in Burlington, Vermont, after two guys took a $5 ice cream course.",
-      "The state bird of Vermont is the hermit thrush, though Jeff insists it should be the black fly.",
-      "Vermont produces a ridiculous amount of maple syrup because the trees are overachievers.",
-      "Montpelier is the smallest state capital in the United States.",
-      "Vermont has no billboards, because even the advertisements wanted privacy.",
-      "The Von Trapp family eventually settled in Stowe, Vermont.",
-      "Vermont has more covered bridges than anyone strictly needs, but nobody is complaining.",
-      "Jeff says every Vermont town has at least one guy named Randy who owns a tractor.",
-      "The Green Mountains are called that because naming things was simpler back then."
-    ];
-
-    function askJeff() {
-      const input = document.getElementById("searchInput").value;
-      const answerBox = document.getElementById("answer");
-
-      if (input.trim() === "") {
-        answerBox.innerHTML = "Jeff needs a question before he can confidently make something up.";
-        return;
-      }
-
-      const randomFact = vermontFacts[Math.floor(Math.random() * vermontFacts.length)];
-
-      answerBox.innerHTML = `
-        <strong>Jeff says:</strong><br>
-        ${randomFact}
-        <div class="jeff">Source: Jeff, probably while holding coffee.</div>
+    if (style === "Jeff argues with himself:") {
+      response = `
+        <strong>Jeff 1:</strong> ${randomFrom(intros)} ${randomFrom(vermontFacts)}, ${randomFrom(tangents)}.<br><br>
+        <strong>Jeff 2:</strong> ${randomFrom(contradictions)}<br><br>
+        <strong>Jeff 1:</strong> No, but listen, ${randomFrom(tangents)}, and that changes everything.<br><br>
+        <strong>Jeff 2:</strong> Fine, but I still think we need to acknowledge that this is mostly vibes.<br><br>
+        <strong>Jeff 1:</strong> ${randomFrom(conclusions)}
+      `;
+    } else {
+      response = `
+        ${randomFrom(intros)}
+        ${randomFrom(vermontFacts)},
+        ${randomFrom(tangents)},
+        ${randomFrom(tangents)},
+        ${randomFrom(conclusions)}
       `;
     }
 
-    document.getElementById("searchInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        askJeff();
-      }
-    });
-  </script>
+    answerBox.innerHTML = `
+      <strong>${style}</strong><br><br>
+      ${response}
+      <div class="jeff">Source: Jeff, currently debating Jeff.</div>
+    `;
+  }
 
-</body>
-</html>
+  document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      askJeff();
+    }
+  });
+</script>

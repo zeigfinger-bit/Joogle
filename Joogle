@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joogle - Ask Jeff</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      text-align: center;
+      margin: 0;
+      padding-top: 120px;
+    }
+
+    .logo {
+      font-size: 90px;
+      font-weight: bold;
+      letter-spacing: -6px;
+      margin-bottom: 5px;
+    }
+
+    .j { color: #4285F4; }
+    .o1 { color: #DB4437; }
+    .o2 { color: #F4B400; }
+    .g { color: #4285F4; }
+    .l { color: #0F9D58; }
+    .e { color: #DB4437; }
+
+    .subtitle {
+      font-size: 22px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 500px;
+      max-width: 80%;
+      padding: 14px 20px;
+      font-size: 18px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      outline: none;
+      box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    }
+
+    .buttons {
+      margin-top: 25px;
+    }
+
+    button {
+      background-color: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
+      color: #3c4043;
+      font-size: 16px;
+      padding: 10px 18px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border: 1px solid #dadce0;
+      box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    }
+
+    #answer {
+      margin: 40px auto;
+      max-width: 650px;
+      font-size: 24px;
+      line-height: 1.4;
+      color: #222;
+      padding: 20px;
+    }
+
+    .jeff {
+      font-style: italic;
+      color: #777;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="logo">
+    <span class="j">J</span><span class="o1">o</span><span class="o2">o</span><span class="g">g</span><span class="l">l</span><span class="e">e</span>
+  </div>
+
+  <div class="subtitle">Ask Jeff</div>
+
+  <input id="searchInput" type="text" placeholder="Ask anything..." />
+
+  <div class="buttons">
+    <button onclick="askJeff()">Joogle Search</button>
+    <button onclick="askJeff()">I'm Feeling Jeffy</button>
+  </div>
+
+  <div id="answer"></div>
+
+  <script>
+    const vermontFacts = [
+      "Cyndi Lauper attended Johnson State College. Probably. Jeff seems confident.",
+      "Vermont has more cows than traffic lights. Jeff refuses to fact-check this.",
+      "The official state flavor of Vermont is maple with a hint of Subaru.",
+      "Lake Champlain definitely has a monster, and Jeff says he saw it near the ferry.",
+      "Vermont was once its own republic before joining the United States.",
+      "In Vermont, mud season is considered a major cultural event.",
+      "Ben & Jerry’s was founded in Burlington, Vermont, after two guys took a $5 ice cream course.",
+      "The state bird of Vermont is the hermit thrush, though Jeff insists it should be the black fly.",
+      "Vermont produces a ridiculous amount of maple syrup because the trees are overachievers.",
+      "Montpelier is the smallest state capital in the United States.",
+      "Vermont has no billboards, because even the advertisements wanted privacy.",
+      "The Von Trapp family eventually settled in Stowe, Vermont.",
+      "Vermont has more covered bridges than anyone strictly needs, but nobody is complaining.",
+      "Jeff says every Vermont town has at least one guy named Randy who owns a tractor.",
+      "The Green Mountains are called that because naming things was simpler back then."
+    ];
+
+    function askJeff() {
+      const input = document.getElementById("searchInput").value;
+      const answerBox = document.getElementById("answer");
+
+      if (input.trim() === "") {
+        answerBox.innerHTML = "Jeff needs a question before he can confidently make something up.";
+        return;
+      }
+
+      const randomFact = vermontFacts[Math.floor(Math.random() * vermontFacts.length)];
+
+      answerBox.innerHTML = `
+        <strong>Jeff says:</strong><br>
+        ${randomFact}
+        <div class="jeff">Source: Jeff, probably while holding coffee.</div>
+      `;
+    }
+
+    document.getElementById("searchInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        askJeff();
+      }
+    });
+  </script>
+
+</body>
+</html>
